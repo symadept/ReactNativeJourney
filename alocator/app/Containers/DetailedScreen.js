@@ -10,8 +10,9 @@ const degree_update_rate = 1; // Number of degrees changed before the callback i
 global.display = 20
 
 export default class DetailedScreen extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log('Props: ' + this.props.places);
     this.spinValue = new Animated.Value(0);
     this.state =  {
         location: null,

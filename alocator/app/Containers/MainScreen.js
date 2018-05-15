@@ -52,12 +52,23 @@ export default class MainScreen extends Component {
     for(var index=0; index < places.length; index++) {
       var item = places[index];
       if(item.secondaryText.indexOf(locality) != -1 && item.primaryText == streetName) {
-        Actions.detailedScreen({places:JSON.stringify(item)});
+        console.log('Street Place: ' + JSON.stringify(item));
+        this.getGPlaceById(item.placeID);
+        // Actions.detailedScreen({places:JSON.stringify(item)});
         return;
       }
     }
   }
 
+  getGPlaceById = (placeId) => {
+    RNGooglePlaces.lookUpPlaceByID(placeId)
+    .then((results) =>
+    {
+      console.log(results);
+      Actions.detailedScreen({places:JSON.stringify(results)});
+    })
+    .catch((error) => console.log(error.message));
+  }
 }
 
 const styles = StyleSheet.create({
