@@ -26,10 +26,38 @@ export default class MainScreen extends Component {
     RNGooglePlaces.openAutocompleteModal()
     .then((place) => {
 		  console.log(place);
-      Actions.detailedScreen({places:JSON.stringify(place)});
+      this.searchStreetLocationFor('Byron Drive', place.latitude, place.longitude, 0.5, place.addressComponents.locality);
+      // Actions.detailedScreen({places:JSON.stringify(place)});
     })
     .catch(error => console.log(error.message));
   }
+
+  searchStreetLocationFor = (query, lat, long, radius, locality) => {
+    console.log(query, lat, long, radius);
+    RNGooglePlaces.getAutocompletePredictions(query, {
+      latitude: lat,
+      longitude: long,
+      radius: radius
+    })
+    .then((places) => {
+      this.findRightStreet(query, locality, places);
+    })
+    .catch(error =>
+      console.log('Exception: ' + error.message)
+    );
+  }
+
+  findRightStreet = (streetName, locality, places) => {
+    // for(var item in places) {
+    for(var index=0; index < places.length; index++) {
+      var item = places[index];
+      if(item.secondaryText.indexOf(locality) != -1 && item.primaryText == streetName) {
+        Actions.detailedScreen({places:JSON.stringify(item)});
+        return;
+      }
+    }
+  }
+
 }
 
 const styles = StyleSheet.create({
