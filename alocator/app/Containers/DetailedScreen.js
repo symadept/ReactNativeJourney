@@ -30,6 +30,7 @@ export default class DetailedScreen extends Component {
   componentWillMount() {
     //this._getLocationAsync();
     //this._getHeadingAsync();
+    this.getTargetLocationDirection();
   }
 
   componentDidMount(){
@@ -82,32 +83,21 @@ export default class DetailedScreen extends Component {
   _getHeadingAsync = async () => {
   };
 
-  _getLocationAsync = async () => {
+  getTargetLocationDirection(){
 
-      let targetLocation = this.state.targetLocation;
-      startpointLat = this.state.location.coords.latitude;
-      console.log("sL: " + startpointLat);
-      startpointLon = this.state.location.coords.longitude;
-      console.log("sLon: " + startpointLon);
-      endpointLat = targetLocation[0];
-      endpointLon = targetLocation[1];
+      let targetLocation = this.props.places;
+      let currentLocation = this.props.currentLocation;
       lat1 = this.state.location.coords.latitude;
       lng1 = this.state.location.coords.longitude;
-      lat2 = targetLocation[0];
-      lng2 = targetLocation[1];
-      y = endpointLon-startpointLon;
-      x = endpointLat-endpointLon
-      radians = Math.atan2(y, x);
-      radians = radians * (180/ Math.PI);
-
+      lat2 = targetLocation.latitude;
+      lng2 = targetLocation.longitude;
       PI = Math.PI;
     dTeta = Math.log(Math.tan((lat2/2)+(PI/4))/Math.tan((lat1/2)+(PI/4)));
     dLon = Math.abs(lng1-lng2);
     teta = Math.atan2(dLon,dTeta);
     direction = teta * (180/ Math.PI);;
       this.setState({targetDirection:direction});
-      console.log("res1: " + radians);
-      console.log("res2: " + direction);
+      console.log("res: " + direction);
 
   };
 
