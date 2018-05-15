@@ -6,17 +6,30 @@ import {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
+import RNGooglePlaces from 'react-native-google-places';
 
-const MainScreen = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}
-      onPress={() => Actions.detailedScreen()}
-      >
-        Main Screen mock
-      </Text>
-    </View>
-  );
+export default class MainScreen extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}
+        // onPress={() => Actions.detailedScreen()}
+        onPress={() => this.onOpenAutocompletePress()}
+        >
+          Main Screen mock
+        </Text>
+      </View>
+    );
+  }
+
+  onOpenAutocompletePress = () => {
+    RNGooglePlaces.openAutocompleteModal()
+    .then((place) => {
+		  console.log(place);
+      Actions.detailedScreen();
+    })
+    .catch(error => console.log(error.message));
+  }
 }
 
 const styles = StyleSheet.create({
@@ -33,5 +46,3 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
 });
-
-export default MainScreen;
