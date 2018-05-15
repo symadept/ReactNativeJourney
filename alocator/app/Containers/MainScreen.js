@@ -26,7 +26,7 @@ export default class MainScreen extends Component {
     RNGooglePlaces.openAutocompleteModal()
     .then((place) => {
 		  console.log(place);
-      Actions.detailedScreen();
+      Actions.detailedScreen({places:JSON.stringify(place)});
     })
     .catch(error => console.log(error.message));
   }

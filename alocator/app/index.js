@@ -17,6 +17,14 @@ import { Router, Scene } from 'react-native-router-flux';
 import MainScreen from './Containers/MainScreen';
 import DetailedScreen from './Containers/DetailedScreen';
 
+// /*Redux setup */
+// import allReducers from './src/reducers/index.js';
+// import App from './src/App.js';
+// import {createStore} from 'redux';
+// import {Provider} from 'react-redux';
+// const store = createStore(allReducers);
+// //*** setup Redux end---
+
 type Props = {};
 export default class App extends Component<Props> {
   render() {
