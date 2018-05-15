@@ -1,0 +1,36 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'alocator' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for alocator
+  pod 'GooglePlaces'
+  pod 'GoogleMaps'
+  pod 'GooglePlacePicker'
+
+  # target 'alocator-tvOSTests' do
+  #   inherit! :search_paths
+  #   # Pods for testing
+  # end
+
+  target 'alocatorTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'alocator-tvOS' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for alocator-tvOS
+
+  target 'alocator-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
