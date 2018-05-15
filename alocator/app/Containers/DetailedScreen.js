@@ -13,6 +13,8 @@ export default class DetailedScreen extends Component {
   constructor(props) {
     super(props);
     console.log('Props: ' + this.props.places);
+    console.log('CurrentPlace: '+ this.props.currentPlace);
+    
     this.spinValue = new Animated.Value(0);
     this.state =  {
         location: null,

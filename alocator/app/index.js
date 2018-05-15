@@ -33,13 +33,13 @@ export default class App extends Component<Props> {
       <Scene key="root">
         <Scene key="mainScreen"
           component={MainScreen}
-          title="Main Screen"
+          title="5G Eligbility Check"
           initial
         />
         <Scene
           key="detailedScreen"
           component={DetailedScreen}
-          title="Detailed Screen"
+          title="Locate 5G Antenna"
         />
       </Scene>
     </Router>
