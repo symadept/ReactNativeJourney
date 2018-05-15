@@ -9,6 +9,10 @@ import { Actions } from 'react-native-router-flux';
 import RNGooglePlaces from 'react-native-google-places';
 
 export default class MainScreen extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -16,7 +20,7 @@ export default class MainScreen extends Component {
         // onPress={() => Actions.detailedScreen()}
         onPress={() => this.onOpenAutocompletePress()}
         >
-          Main Screen mock
+          Click here to check your 5G Eligbility!
         </Text>
       </View>
     );
@@ -65,7 +69,16 @@ export default class MainScreen extends Component {
     .then((results) =>
     {
       console.log(results);
-      Actions.detailedScreen({places:JSON.stringify(results)});
+      Actions.detailedScreen({places:JSON.stringify(results), currentPlace:this.getCurrentPlace()});
+    })
+    .catch((error) => console.log(error.message));
+  }
+
+  getCurrentPlace = () => {
+    RNGooglePlaces.getCurrentPlace()
+    .then((results) => {
+      console.log(results);
+      return results;
     })
     .catch((error) => console.log(error.message));
   }
