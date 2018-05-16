@@ -69,7 +69,7 @@ export default class MainScreen extends Component {
     .then((results) =>
     {
       console.log(results);
-      Actions.detailedScreen({places:JSON.stringify(results), currentPlace:this.getCurrentPlace()});
+      Actions.detailedScreen({places:results, currentPlace:this.getCurrentPlace()});
     })
     .catch((error) => console.log(error.message));
   }
