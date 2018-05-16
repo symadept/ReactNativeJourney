@@ -14,7 +14,7 @@ export default class DetailedScreen extends Component {
     super(props);
     console.log('Props: ' + this.props.places);
     console.log('CurrentPlace: '+ this.props.currentPlace);
-    
+
     this.spinValue = new Animated.Value(0);
     this.state =  {
         location: null,
@@ -49,8 +49,8 @@ export default class DetailedScreen extends Component {
 	})
 
   DeviceEventEmitter.addListener('headingUpdated', data => {
-    	console.log('New heading is:', data.heading);
-      this.setState({heading: data.heading})
+    	console.log('New heading is:', data.heading );
+      this.setState({heading: data.heading + this.state.targetDirection})
     });
   }
 
@@ -88,9 +88,9 @@ export default class DetailedScreen extends Component {
   getTargetLocationDirection(){
 
       let targetLocation = this.props.places;
-      let currentLocation = this.props.currentLocation;
-      lat1 = this.state.location.coords.latitude;
-      lng1 = this.state.location.coords.longitude;
+      let currentPlace = this.props.currentPlace;
+      lat1 = 32.875947;
+      lng1 = -96.953213;
       lat2 = targetLocation.latitude;
       lng2 = targetLocation.longitude;
       PI = Math.PI;
@@ -156,16 +156,23 @@ export default class DetailedScreen extends Component {
 
       <View style={styles.container}>
         <Text style={styles.text}>{display+'°'}</Text>
-        <View style={styles.arrowContainer} >
-          <Image resizeMode='contain' source={require('../assets/valid_copy.png')} style={styles.arrow} />
-        </View>
         <View style={styles.imageContainer} >
-          <Animated.Image resizeMode='contain' source={require('../assets/pointer.png')}
+        <View style={styles.imageContainer} >
+          <Animated.Image resizeMode='contain' source={require('../assets/static_ring.png')}
             style={{
             width:  deviceWidth  - 10, height: deviceHeight/2 - 10,
             left: deviceWidth /2 -  (deviceWidth   - 10)/2, top:  deviceHeight /2 - (deviceHeight/2  - 10)/2,
-            transform: [{rotate: spin}],
           }} />
+        </View>
+        <Animated.Image resizeMode='contain' source={require('../assets/antenna.png')}
+          style={{
+          width:  deviceWidth  - 10, height: deviceHeight/2 - 10,
+          left: deviceWidth /2 -  (deviceWidth   - 10)/2, top:  deviceHeight /2 - (deviceHeight/2  - 10)/2,
+          transform: [{rotate: spin}],
+        }} />
+        </View>
+        <View style={styles.arrowContainer} >
+          <Image resizeMode='contain' source={require('../assets/big_arrow.png')} style={styles.arrow} />
         </View>
 
       </View>
